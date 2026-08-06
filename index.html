@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NextGen Capture erstellt Screenshots und Bildschirmaufnahmen und bietet einen integrierten Editor für klare Annotationen.">
+  <title>NextGen Capture – Screenshots und Aufnahmen in Chrome</title>
+  <style>
+    :root { color-scheme: dark; --bg: #0b1020; --surface: #151d35; --text: #f4f7ff; --muted: #b9c4df; --accent: #69a8ff; --accent-strong: #3985ed; --border: #2b385a; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(circle at top left, #1d3b78 0, var(--bg) 44rem); color: var(--text); font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    a { color: inherit; }
+    .wrap { width: min(1100px, calc(100% - 40px)); margin: 0 auto; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
+    .brand { font-size: 1.15rem; font-weight: 760; letter-spacing: -.02em; text-decoration: none; }
+    nav { display: flex; gap: 20px; font-size: .95rem; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--text); }
+    .hero { padding: 90px 0 82px; max-width: 800px; }
+    .eyebrow { color: #9bc5ff; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; }
+    h1 { margin: 13px 0 18px; font-size: clamp(2.5rem, 7vw, 5.1rem); line-height: .98; letter-spacing: -.06em; }
+    .lead { max-width: 660px; color: var(--muted); font-size: 1.2rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button { border: 1px solid var(--border); border-radius: 10px; padding: 11px 17px; text-decoration: none; font-weight: 700; }
+    .button.primary { border-color: var(--accent-strong); background: var(--accent-strong); }
+    .button:hover { transform: translateY(-1px); }
+    section { padding: 58px 0; border-top: 1px solid var(--border); }
+    h2 { margin: 0 0 12px; font-size: clamp(1.65rem, 3vw, 2.3rem); letter-spacing: -.04em; }
+    .section-lead { margin: 0; max-width: 690px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+    .card { padding: 22px; background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--border); border-radius: 14px; }
+    .card h3 { margin: 0 0 7px; font-size: 1.06rem; }
+    .card p { margin: 0; color: var(--muted); }
+    .support { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 30px; background: var(--surface); border-radius: 16px; }
+    footer { display: flex; justify-content: space-between; gap: 20px; padding: 28px 0 42px; color: var(--muted); font-size: .9rem; }
+    @media (max-width: 680px) { header, footer, .support { align-items: flex-start; flex-direction: column; } .grid { grid-template-columns: 1fr; } nav { gap: 14px; } .hero { padding: 64px 0; } }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="./">NextGen Capture</a>
+    <nav aria-label="Hauptnavigation">
+      <a href="#funktionen">Funktionen</a>
+      <a href="#hilfe">Hilfe</a>
+      <a href="privacy-policy/">Datenschutz</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="eyebrow">Chrome-Erweiterung</div>
+      <h1>Erfassen. Erklären. Teilen.</h1>
+      <p class="lead">NextGen Capture erstellt Screenshots und Bildschirmaufnahmen direkt in Chrome. Markiere Details im integrierten Editor und speichere dein Ergebnis lokal.</p>
+      <div class="actions">
+        <a class="button primary" href="#hilfe">Feedback geben</a>
+        <a class="button" href="privacy-policy/">Datenschutzerklärung</a>
+      </div>
+    </section>
+
+    <section id="funktionen">
+      <div class="wrap">
+        <h2>Alles Wesentliche für klare Erklärungen</h2>
+        <p class="section-lead">Vom schnellen Ausschnitt bis zur kommentierten Aufnahme: Du entscheidest, was erfasst und exportiert wird.</p>
+        <div class="grid">
+          <article class="card"><h3>Gezielt erfassen</h3><p>Sichtbarer Bereich, Auswahl, Element, ganze Seite, Fenster oder Bildschirm – nur auf deine Aktion.</p></article>
+          <article class="card"><h3>Direkt annotieren</h3><p>Pfeile, Formen, Text, Markierungen, Unschärfen, Nummerierungen und Emojis machen Inhalte verständlich.</p></article>
+          <article class="card"><h3>Lokal behalten</h3><p>Aufnahmen, Bearbeitungsstände und Einstellungen verbleiben auf deinem Gerät, bis du selbst einen Export auslöst.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="hilfe">
+      <div class="wrap support">
+        <div>
+          <h2>Hilfe, Bugs und Ideen</h2>
+          <p class="section-lead">Beschreibe Fehler mit den Schritten zum Nachstellen. Bitte veröffentliche keine Screenshots, Zugangsdaten oder sonstigen sensiblen Inhalte in öffentlichen Issues.</p>
+        </div>
+        <a class="button primary" href="https://github.com/ChangNoi79/NextGenCapture-Site/issues/new/choose">Issue erstellen</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span>© 2026 NextGen Capture</span>
+    <a href="privacy-policy/">Datenschutz</a>
+  </footer>
+</body>
+</html>
