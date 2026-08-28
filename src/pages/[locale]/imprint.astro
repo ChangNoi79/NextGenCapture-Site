@@ -5,4 +5,4 @@ export function getStaticPaths() { return locales.map((locale) => ({ params: { l
 const locale = Astro.params.locale as Locale;
 const text = copy[locale];
 ---
-<BaseLayout locale={locale} title={text.meta.imprint} description={text.legal.imprintTitle}><article class="shell legal"><div class="page-head"><h1>{text.legal.imprintTitle}</h1></div><p class="pending">{text.legal.imprintPending}</p><p><a href={`/${locale}/`}>{text.legal.back}</a></p></article></BaseLayout>
+<BaseLayout locale={locale} title={text.meta.imprint} description={text.legal.imprintTitle}><article class="shell legal"><div class="page-head"><h1>{text.legal.imprintTitle}</h1></div>{text.legal.imprint.map((section) => <section><h2>{section.heading}</h2><p>{section.lines.map((line) => <>{line}<br /></>)}</p></section>)}<p><a href={`/${locale}/`}>{text.legal.back}</a></p></article></BaseLayout>

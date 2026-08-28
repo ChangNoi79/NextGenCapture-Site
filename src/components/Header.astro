@@ -1,7 +1,7 @@
 ---
 import { copy, type Locale } from '../data/site';
-interface Props { locale: Locale; current: string; }
-const { locale, current } = Astro.props;
+interface Props { locale: Locale; current: string; path: string; }
+const { locale, current, path } = Astro.props;
 const text = copy[locale];
 const links = [
   ['home', `/${locale}/`, text.nav.home],
@@ -10,7 +10,7 @@ const links = [
   ['support', `/${locale}/#support`, text.nav.support]
 ];
 const otherLocale: Locale = locale === 'de' ? 'en' : 'de';
-const currentSuffix = current === 'home' ? '/' : `/${current}/`;
+const currentSuffix = path || '/';
 ---
 <header class="site-header">
   <div class="shell header-inner">
