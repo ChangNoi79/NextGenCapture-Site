@@ -1,10 +1,10 @@
 # NextGen Capture – Website
 
-Öffentliche Landing-Page, Datenschutzerklärung und Support-Tracker für die Chrome-Erweiterung **NextGen Capture**.
+Mehrsprachige, statisch erzeugte Produktseite für NextGen Capture. Die Website wird als Astro-Projekt gebaut und auf `https://nextgencapture.app` veröffentlicht.
 
-- Website: `https://changnoi79.github.io/NextGenCapture-Site/`
-- Datenschutzerklärung: `https://changnoi79.github.io/NextGenCapture-Site/privacy-policy/`
-- Bugs und Ideen: [GitHub Issues](https://github.com/ChangNoi79/NextGenCapture-Site/issues)
+- Deutsch: `/de/`
+- English: `/en/`
+- Kundenmeldungen: [GitHub Issues](https://github.com/ChangNoi79/NextGenCapture-Site/issues)
 
-Der Quellcode der Erweiterung bleibt in einem separaten, nicht öffentlichen Repository.
+Release Notes und freigegebene Roadmap-Issues kommen beim Build aus dem separaten Extension-Repository. Details zur All-Inkl-Veröffentlichung stehen in [DEPLOYMENT.md](DEPLOYMENT.md).
 Offizielle Website, Hilfe und Datenschutz für NextGen Capture

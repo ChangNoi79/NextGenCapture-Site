@@ -1,0 +1,23 @@
+---
+import { copy, type Locale } from '../data/site';
+interface Props { locale: Locale; current: string; }
+const { locale, current } = Astro.props;
+const text = copy[locale];
+const links = [
+  ['home', `/${locale}/`, text.nav.home],
+  ['roadmap', `/${locale}/roadmap/`, text.nav.roadmap],
+  ['changelog', `/${locale}/changelog/`, text.nav.changelog],
+  ['support', `/${locale}/#support`, text.nav.support]
+];
+const otherLocale: Locale = locale === 'de' ? 'en' : 'de';
+const currentSuffix = current === 'home' ? '/' : `/${current}/`;
+---
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href={`/${locale}/`} aria-label="NextGen Capture">NextGen <span>Capture</span></a>
+    <nav aria-label={text.nav.home}>
+      {links.map(([key, href, label]) => <a href={href} aria-current={current === key ? 'page' : undefined}>{label}</a>)}
+    </nav>
+    <a class="language" href={`/${otherLocale}${currentSuffix}`} lang={otherLocale} aria-label={text.switchLanguage}>{copy[otherLocale].localeName}</a>
+  </div>
+</header>

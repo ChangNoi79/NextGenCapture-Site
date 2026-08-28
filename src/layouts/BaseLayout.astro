@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { Locale } from '../data/site';
+
+interface Props { locale: Locale; title: string; description: string; current?: string; }
+const { locale, title, description, current = '' } = Astro.props;
+const siteUrl = new URL(`/${locale}${Astro.url.pathname.replace(/^\/(de|en)/, '')}`, 'https://nextgencapture.app');
+const alternateLocale: Locale = locale === 'de' ? 'en' : 'de';
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NextGen Capture" />
+    <meta property="og:title" content={`${title} · NextGen Capture`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:image" content="https://nextgencapture.app/assets/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={siteUrl} />
+    <link rel="alternate" hreflang={locale} href={siteUrl} />
+    <link rel="alternate" hreflang={alternateLocale} href={new URL(siteUrl.pathname.replace(`/${locale}/`, `/${alternateLocale}/`), siteUrl)} />
+    <link rel="alternate" hreflang="x-default" href="https://nextgencapture.app/de/" />
+    <title>{title} · NextGen Capture</title>
+  </head>
+  <body>
+    <Header locale={locale} current={current} />
+    <main><slot /></main>
+    <Footer locale={locale} />
+  </body>
+</html>

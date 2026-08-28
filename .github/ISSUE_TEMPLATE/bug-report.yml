@@ -1,0 +1,20 @@
+name: Fehlerbericht
+description: Einen Fehler in NextGen Capture melden
+title: "[Bug]: "
+labels: [customer-report, bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Bitte keine Zugangsdaten, personenbezogenen Daten oder vertraulichen Aufnahmen veröffentlichen."
+  - type: textarea
+    id: description
+    attributes: { label: Was ist passiert?, description: Bitte beschreibe den Fehler kurz und konkret. }
+    validations: { required: true }
+  - type: textarea
+    id: steps
+    attributes: { label: Schritte zum Nachstellen, placeholder: "1. …\n2. …\n3. …" }
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes: { label: NextGen-Capture-Version }
+    validations: { required: true }

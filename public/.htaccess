@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Die Apex-Domain ist kanonisch.
+RewriteCond %{HTTP_HOST} ^www\.nextgencapture\.app$ [NC]
+RewriteRule ^(.*)$ https://nextgencapture.app/$1 [R=301,L]
+
+# Deutsch ist die Standardsprache. Jede weitere Seite hat eine eindeutige Locale-URL.
+RewriteRule ^$ /de/ [R=302,L]

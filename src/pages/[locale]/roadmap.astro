@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { copy, locales, type Locale } from '../../data/site';
+import { getRoadmapIssues, roadmapStatus, roadmapType } from '../../lib/github';
+export async function getStaticPaths() { return locales.map((locale) => ({ params: { locale } })); }
+const locale = Astro.params.locale as Locale;
+const text = copy[locale];
+const issues = await getRoadmapIssues(locale);
+const groups = ['planned', 'progress', 'shipped'] as const;
+const labels = { planned: text.roadmap.planned, progress: text.roadmap.progress, shipped: text.roadmap.shipped };
+---
+<BaseLayout locale={locale} current="roadmap" title={text.meta.roadmap} description={text.roadmap.lead}>
+  <div class="shell page-head"><h1>{text.roadmap.title}</h1><p>{text.roadmap.lead}</p></div>
+  <div class="shell roadmap-groups">{issues.length === 0 ? <p class="empty">{text.roadmap.empty}</p> : groups.map((group) => { const entries = issues.filter((issue) => roadmapStatus(issue.labels) === group); return entries.length > 0 && <section><h2 class="group-title">{labels[group]}</h2><div class="entries">{entries.map((issue) => <article class="roadmap-card"><div class="issue-meta"><span class:list={['badge', roadmapType(issue.labels)]}>{roadmapType(issue.labels) === 'bug' ? text.roadmap.bug : text.roadmap.feature}</span><span>#{issue.number}</span></div><h2><a href={issue.html_url}>{issue.title}</a></h2>{issue.body && <p>{issue.body}</p>}</article>)}</div></section>; })}</div>
+</BaseLayout>

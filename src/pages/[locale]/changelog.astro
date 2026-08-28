@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { copy, locales, type Locale } from '../../data/site';
+import { getReleases } from '../../lib/github';
+export function getStaticPaths() { return locales.map((locale) => ({ params: { locale } })); }
+const locale = Astro.params.locale as Locale;
+const text = copy[locale];
+const releases = await getReleases(locale);
+const date = new Intl.DateTimeFormat(locale, { dateStyle: 'long' });
+---
+<BaseLayout locale={locale} current="changelog" title={text.meta.changelog} description={text.changelog.lead}>
+  <div class="shell page-head"><h1>{text.changelog.title}</h1><p>{text.changelog.lead}</p></div>
+  <div class="shell roadmap-groups">{releases.length === 0 ? <p class="empty">{text.changelog.empty}</p> : releases.map((release) => <article class="release"><div class="release-meta"><span>{release.tag_name}</span>{release.published_at && <span>{text.changelog.published}: {date.format(new Date(release.published_at))}</span>}</div><h2><a href={release.html_url}>{release.name || release.tag_name}</a></h2>{release.body && <p class="release-body">{release.body}</p>}<p class="note">{text.changelog.original}</p></article>)}</div>
+</BaseLayout>
