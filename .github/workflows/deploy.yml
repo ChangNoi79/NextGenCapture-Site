@@ -23,7 +23,6 @@ jobs:
       USERNAME: ${{ secrets.ALLINKL_SFTP_USERNAME }}
       PASSWORD: ${{ secrets.ALLINKL_SFTP_PASSWORD }}
       REMOTE_PATH: ${{ secrets.ALLINKL_REMOTE_PATH }}
-      HOST_KEY: ${{ secrets.ALLINKL_SFTP_HOST_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,16 +32,13 @@ jobs:
       - run: npm run build
         env:
           NEXTGEN_CAPTURE_READ_TOKEN: ${{ secrets.NEXTGEN_CAPTURE_READ_TOKEN }}
-      - name: SFTP-Client installieren
-        if: ${{ env.HOST != '' && env.USERNAME != '' && env.PASSWORD != '' && env.REMOTE_PATH != '' && env.HOST_KEY != '' }}
+      - name: FTPS-Client installieren
+        if: ${{ env.HOST != '' && env.USERNAME != '' && env.PASSWORD != '' && env.REMOTE_PATH != '' }}
         run: sudo apt-get update && sudo apt-get install --yes lftp
-      - name: All-Inkl-Host prüfen und veröffentlichen
-        if: ${{ env.HOST != '' && env.USERNAME != '' && env.PASSWORD != '' && env.REMOTE_PATH != '' && env.HOST_KEY != '' }}
+      - name: Über FTPS veröffentlichen
+        if: ${{ env.HOST != '' && env.USERNAME != '' && env.PASSWORD != '' && env.REMOTE_PATH != '' }}
         run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "$HOST_KEY" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-          lftp -c "set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts'; open -u $USERNAME,$PASSWORD sftp://$HOST:$PORT; mirror --reverse --delete --verbose dist $REMOTE_PATH; bye"
+          lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:ssl-auth TLS; set ssl:verify-certificate true; open -u $USERNAME,$PASSWORD ftp://$HOST:$PORT; mirror --reverse --delete --verbose dist $REMOTE_PATH; bye"
       - name: Hinweis zu noch fehlenden Deployment-Secrets
-        if: ${{ env.HOST == '' || env.USERNAME == '' || env.PASSWORD == '' || env.REMOTE_PATH == '' || env.HOST_KEY == '' }}
+        if: ${{ env.HOST == '' || env.USERNAME == '' || env.PASSWORD == '' || env.REMOTE_PATH == '' }}
         run: echo 'All-Inkl-Secrets fehlen noch. Der Build wurde geprüft, aber nicht veröffentlicht.'

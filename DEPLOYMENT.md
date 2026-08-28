@@ -4,19 +4,18 @@
 
 1. Die Domain und optional `www` auf den All-Inkl-Webspace zeigen lassen.
 2. Für `nextgencapture.app` HTTPS aktivieren.
-3. Den Webroot als Wert für `ALLINKL_REMOTE_PATH` notieren.
-4. Die Host-Key-Zeile des SFTP-Servers in `ALLINKL_SFTP_HOST_KEY` hinterlegen. Sie muss exakt dem Eintrag in `known_hosts` entsprechen.
+3. Im KAS unter **FTP** einen FTP-Zugang für den Domain-Webspace anlegen bzw. den vorhandenen Zugang verwenden.
+4. Den Webroot als Wert für `ALLINKL_REMOTE_PATH` notieren. Je nach KAS-Einstellung ist dies der Domain-Ordner, etwa `/nextgencapture.app/`.
 
 ## GitHub-Secrets im Site-Repository
 
 | Secret | Zweck |
 | --- | --- |
-| `ALLINKL_SFTP_HOST` | SFTP-Hostname von All-Inkl |
-| `ALLINKL_SFTP_PORT` | SFTP-Port |
-| `ALLINKL_SFTP_USERNAME` | SFTP-Benutzername |
-| `ALLINKL_SFTP_PASSWORD` | SFTP-Passwort |
+| `ALLINKL_SFTP_HOST` | FTP-Hostname von All-Inkl (der bestehende Secret-Name wird weiterverwendet) |
+| `ALLINKL_SFTP_PORT` | `21` für explizites FTPS |
+| `ALLINKL_SFTP_USERNAME` | FTP-Benutzername |
+| `ALLINKL_SFTP_PASSWORD` | FTP-Passwort |
 | `ALLINKL_REMOTE_PATH` | Absoluter Zielpfad des Domain-Webroots |
-| `ALLINKL_SFTP_HOST_KEY` | Verifizierter SSH-Host-Key im `known_hosts`-Format |
 | `NEXTGEN_CAPTURE_READ_TOKEN` | Optionaler, feingranularer GitHub-Token mit Lesezugriff auf das Extension-Repo |
 
 ## GitHub-Secret im Extension-Repository
@@ -25,4 +24,4 @@
 
 ## Vor dem Go-live
 
-Die Platzhalterseite für das Impressum muss mit Betreibername, ladungsfähiger Anschrift und Kontaktangaben vervollständigt werden. Anschließend den ersten manuellen Workflow-Lauf auslösen und die deutsche sowie englische Version auf der Domain prüfen.
+Anschließend den ersten manuellen Workflow-Lauf auslösen und die deutsche sowie englische Version auf der Domain prüfen. Der Upload verwendet explizites FTPS (FTP über TLS); ein SSH-Tarif oder SSH-Host-Key ist dafür nicht erforderlich.
