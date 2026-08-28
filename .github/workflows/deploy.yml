@@ -15,9 +15,15 @@ concurrency:
 
 jobs:
   deploy:
-    if: ${{ secrets.ALLINKL_SFTP_HOST != '' && secrets.ALLINKL_SFTP_USERNAME != '' && secrets.ALLINKL_SFTP_PASSWORD != '' && secrets.ALLINKL_REMOTE_PATH != '' && secrets.ALLINKL_SFTP_HOST_KEY != '' }}
     runs-on: ubuntu-latest
     environment: production
+    env:
+      HOST: ${{ secrets.ALLINKL_SFTP_HOST }}
+      PORT: ${{ secrets.ALLINKL_SFTP_PORT }}
+      USERNAME: ${{ secrets.ALLINKL_SFTP_USERNAME }}
+      PASSWORD: ${{ secrets.ALLINKL_SFTP_PASSWORD }}
+      REMOTE_PATH: ${{ secrets.ALLINKL_REMOTE_PATH }}
+      HOST_KEY: ${{ secrets.ALLINKL_SFTP_HOST_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,17 +34,15 @@ jobs:
         env:
           NEXTGEN_CAPTURE_READ_TOKEN: ${{ secrets.NEXTGEN_CAPTURE_READ_TOKEN }}
       - name: SFTP-Client installieren
+        if: ${{ env.HOST != '' && env.USERNAME != '' && env.PASSWORD != '' && env.REMOTE_PATH != '' && env.HOST_KEY != '' }}
         run: sudo apt-get update && sudo apt-get install --yes lftp
       - name: All-Inkl-Host prüfen und veröffentlichen
-        env:
-          HOST: ${{ secrets.ALLINKL_SFTP_HOST }}
-          PORT: ${{ secrets.ALLINKL_SFTP_PORT }}
-          USERNAME: ${{ secrets.ALLINKL_SFTP_USERNAME }}
-          PASSWORD: ${{ secrets.ALLINKL_SFTP_PASSWORD }}
-          REMOTE_PATH: ${{ secrets.ALLINKL_REMOTE_PATH }}
-          HOST_KEY: ${{ secrets.ALLINKL_SFTP_HOST_KEY }}
+        if: ${{ env.HOST != '' && env.USERNAME != '' && env.PASSWORD != '' && env.REMOTE_PATH != '' && env.HOST_KEY != '' }}
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "$HOST_KEY" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
           lftp -c "set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts'; open -u $USERNAME,$PASSWORD sftp://$HOST:$PORT; mirror --reverse --delete --verbose dist $REMOTE_PATH; bye"
+      - name: Hinweis zu noch fehlenden Deployment-Secrets
+        if: ${{ env.HOST == '' || env.USERNAME == '' || env.PASSWORD == '' || env.REMOTE_PATH == '' || env.HOST_KEY == '' }}
+        run: echo 'All-Inkl-Secrets fehlen noch. Der Build wurde geprüft, aber nicht veröffentlicht.'
