@@ -1,4 +1,5 @@
 import type { Locale } from '../data/site';
+import { historicalReleases } from '../data/release-history';
 
 const repository = 'ChangNoi79/NextGenCapture';
 const apiUrl = `https://api.github.com/repos/${repository}`;
@@ -30,7 +31,18 @@ async function request<T>(path: string, fallback: T): Promise<T> {
 
 export async function getReleases(locale: Locale) {
   const releases = await request<Release[]>('/releases?per_page=100', []);
-  return releases.map((release) => ({ ...release, ...releaseTranslations[release.tag_name]?.[locale] }));
+  const historic: Release[] = historicalReleases.map((release) => ({
+    tag_name: release.tag_name,
+    name: release.name,
+    body: release.body[locale],
+    published_at: release.published_at,
+    html_url: release.html_url
+  }));
+  const byTag = new Map(historic.map((release) => [release.tag_name, release]));
+  for (const release of releases) byTag.set(release.tag_name, release);
+  return [...byTag.values()]
+    .sort((a, b) => Date.parse(b.published_at || '1970-01-01') - Date.parse(a.published_at || '1970-01-01'))
+    .map((release) => ({ ...release, ...releaseTranslations[release.tag_name]?.[locale] }));
 }
 
 export async function getRoadmapIssues(locale: Locale) {

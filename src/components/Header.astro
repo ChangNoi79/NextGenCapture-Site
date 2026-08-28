@@ -14,7 +14,7 @@ const currentSuffix = path || '/';
 ---
 <header class="site-header">
   <div class="shell header-inner">
-    <a class="brand" href={`/${locale}/`} aria-label="NextGen Capture">NextGen <span>Capture</span></a>
+    <a class="brand" href={`/${locale}/`} aria-label="NextGen Capture"><img src="/assets/extension/icon128.png" width="32" height="32" alt="" />NextGen <span>Capture</span></a>
     <nav aria-label={text.nav.home}>
       {links.map(([key, href, label]) => <a href={href} aria-current={current === key ? 'page' : undefined}>{label}</a>)}
     </nav>
