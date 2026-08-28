@@ -13,6 +13,13 @@ const releaseUrl = (tag: string) => `https://github.com/ChangNoi79/NextGenCaptur
 // Curated historic notes mirrored from the extension's CHANGELOG.md.
 export const historicalReleases: HistoricalRelease[] = [
   {
+    tag_name: '1.0.13', name: 'Version 1.0.13', published_at: '2026-08-28T00:00:00Z', html_url: releaseUrl('1.0.13'),
+    body: {
+      de: 'Neu: Datenschutz und Projektinformationen öffnen über die neue Produktwebsite nextgencapture.app. Die Datenschutzseite folgt dabei der Sprache der Chrome-Oberfläche.',
+      en: 'New: Privacy and project information now open through the new product website nextgencapture.app. The privacy page follows the Chrome interface language.'
+    }
+  },
+  {
     tag_name: '1.0.12', name: 'Version 1.0.12', published_at: '2026-08-17T00:00:00Z', html_url: releaseUrl('1.0.12'),
     body: {
       de: 'Verbessert: Der Textmarker zeigt beim Bearbeiten einen runden, halbtransparenten Cursor mit klarer Kontur. Farbe und Größe folgen der gewählten Marker-Einstellung.',
