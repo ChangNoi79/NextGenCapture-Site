@@ -1,0 +1,30 @@
+name: "💬 Hilfe erhalten (Deutsch)"
+description: Hilfe bei der Nutzung von NextGen Capture erhalten.
+title: "[Support]: "
+labels: ["customer-report", "support"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        GitHub-Issues sind öffentlich. Bitte veröffentliche keine Zugangsdaten, personenbezogenen Daten oder vertraulichen Aufnahmen.
+  - type: textarea
+    id: question
+    attributes:
+      label: Wobei brauchst du Hilfe?
+      description: Beschreibe dein Ziel und was du bereits versucht hast.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version von NextGen Capture
+      placeholder: z. B. 1.0.1
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Chrome-Version und Betriebssystem
+      placeholder: z. B. Chrome 140 unter macOS 15
+    validations:
+      required: true

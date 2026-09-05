@@ -1,0 +1,29 @@
+name: "✨ Suggest an idea (English)"
+description: Share an idea that would improve NextGen Capture.
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do not share credentials, personal data, or confidential content.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would you like to solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Your idea
+      description: Describe the desired behavior as concretely as possible.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: I have not included personal or confidential content.
+          required: true

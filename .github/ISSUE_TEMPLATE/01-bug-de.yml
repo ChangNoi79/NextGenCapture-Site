@@ -1,21 +1,21 @@
-name: Fehler melden
-description: Melde einen reproduzierbaren Fehler in NextGen Capture.
+name: "🐞 Fehler melden (Deutsch)"
+description: Einen reproduzierbaren Fehler in NextGen Capture melden.
 title: "[Bug]: "
 labels: ["bug", "triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Danke für deine Meldung. Bitte keine Zugangsdaten, persönlichen Daten oder vertraulichen Screenshots veröffentlichen.
+        Danke für deine Meldung. Bitte keine Zugangsdaten, personenbezogenen Daten oder vertraulichen Screenshots veröffentlichen.
   - type: textarea
-    id: beschreibung
+    id: description
     attributes:
       label: Was ist passiert?
       description: Beschreibe den Fehler kurz und klar.
     validations:
       required: true
   - type: textarea
-    id: schritte
+    id: steps
     attributes:
       label: Schritte zum Nachstellen
       description: Nummeriere die Schritte, damit wir den Fehler reproduzieren können.
@@ -26,7 +26,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: erwartet
+    id: expected
     attributes:
       label: Erwartetes Verhalten
     validations:
@@ -39,14 +39,14 @@ body:
     validations:
       required: true
   - type: input
-    id: chrome
+    id: browser
     attributes:
       label: Chrome-Version und Betriebssystem
       placeholder: z. B. Chrome 140 unter macOS 15
     validations:
       required: true
   - type: checkboxes
-    id: datenschutz
+    id: privacy
     attributes:
       label: Datenschutz
       options:
