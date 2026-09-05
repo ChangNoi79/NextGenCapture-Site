@@ -16,11 +16,15 @@
 | `ALLINKL_SFTP_USERNAME` | FTP-Benutzername |
 | `ALLINKL_SFTP_PASSWORD` | FTP-Passwort |
 | `ALLINKL_REMOTE_PATH` | Absoluter Zielpfad des Domain-Webroots |
-| `NEXTGEN_CAPTURE_READ_TOKEN` | Optionaler, feingranularer GitHub-Token mit Lesezugriff auf das Extension-Repo |
+| `NEXTGEN_CAPTURE_READ_TOKEN` | Feingranularer GitHub-Token mit ausschließlich **Contents: Read** auf `ChangNoi79/NextGenCapture`; erforderlich, damit der Website-Build neue GitHub-Releases aus dem privaten Extension-Repository übernimmt |
 
 ## GitHub-Secret im Extension-Repository
 
 `SITE_REPOSITORY_DISPATCH_TOKEN` benötigt ausschließlich das Recht, im Repository `ChangNoi79/NextGenCapture-Site` einen Repository-Dispatch auszulösen. Dadurch werden veröffentlichte Releases und Roadmap-Änderungen zeitnah in die statische Website übernommen.
+
+## Release-Changelog automatisch aktualisieren
+
+Der Website-Build liest GitHub-Releases aus dem Extension-Repository. Beim Erstellen oder Bearbeiten eines GitHub-Releases löst das Extension-Repository bereits automatisch einen Website-Build aus. Damit die neuen Einträge im statischen Build erscheinen, muss im Website-Repository einmalig `NEXTGEN_CAPTURE_READ_TOKEN` hinterlegt sein. Ohne dieses Secret zeigt die Website nur die versionierte Fallbackhistorie aus `src/data/release-history.ts`.
 
 ## Vor dem Go-live
 

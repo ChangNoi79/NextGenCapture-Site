@@ -13,6 +13,27 @@ const releaseUrl = (tag: string) => `https://github.com/ChangNoi79/NextGenCaptur
 // Curated historic notes mirrored from the extension's CHANGELOG.md.
 export const historicalReleases: HistoricalRelease[] = [
   {
+    tag_name: '1.0.16', name: 'Version 1.0.16', published_at: '2026-09-03T00:00:00Z', html_url: releaseUrl('1.0.16'),
+    body: {
+      de: 'Neu: Bilder lassen sich nach einer ausdrücklich eingerichteten Verbindung direkt aus dem Editor an Slack-Channels oder Personen senden. Bild, optionaler Begleittext und Ziel werden ausschließlich nach Klick auf „In Slack senden“ direkt an Slack übertragen. Ungültige Slack-Verbindungen lassen sich anschließend direkt neu verbinden.',
+      en: 'New: After an explicit connection, images can be sent from the editor directly to Slack channels or people. The image, optional message, and destination are sent directly to Slack only after clicking “Send to Slack”. Invalid Slack connections can then be reconnected right away.'
+    }
+  },
+  {
+    tag_name: '1.0.15', name: 'Version 1.0.15', published_at: '2026-09-02T00:00:00Z', html_url: releaseUrl('1.0.15'),
+    body: {
+      de: 'Neu: Eine lokale Bildanleitung erklärt beim ersten Start und Update, wie NextGen Capture über das Puzzle-Menü an die Chrome-Leiste angepinnt wird. Behoben: Papierkorb und Galerie aktualisieren sich bei verworfenen Screenshots zuverlässig ohne Seiten-Refresh.',
+      en: 'New: A local visual guide explains on first start and update how to pin NextGen Capture to Chrome’s toolbar through the extensions menu. Fixed: The trash and gallery reliably update for discarded screenshots without a page refresh.'
+    }
+  },
+  {
+    tag_name: '1.0.14', name: 'Version 1.0.14', published_at: '2026-08-31T00:00:00Z', html_url: releaseUrl('1.0.14'),
+    body: {
+      de: 'Neu: Gelöschte oder verworfene Screenshots bleiben 14 Tage im lokalen Papierkorb und lassen sich wiederherstellen. Die Produktwebsite, lokale Versionshinweise und Changelog-Links sind direkt aus der Erweiterung erreichbar.',
+      en: 'New: Deleted or discarded screenshots remain in the local trash for 14 days and can be restored. The product website, local release notes, and changelog links are available directly from the extension.'
+    }
+  },
+  {
     tag_name: '1.0.13', name: 'Version 1.0.13', published_at: '2026-08-28T00:00:00Z', html_url: releaseUrl('1.0.13'),
     body: {
       de: 'Neu: Datenschutz und Projektinformationen öffnen über die neue Produktwebsite nextgencapture.app. Die Datenschutzseite folgt dabei der Sprache der Chrome-Oberfläche.',
